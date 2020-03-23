@@ -1,0 +1,16 @@
+{
+    "name": "fffaraz/php-utils",
+    "type": "library",
+    "description": "A collection of useful PHP functions, mini classes and snippets.",
+    "keywords": ["helpers", "utils"],
+    "homepage": "https://github.com/fffaraz/php-utils",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Monolog": "src"
+        }
+    }
+}
