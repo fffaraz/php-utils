@@ -1,5 +1,5 @@
 {
-    "name": "fffaraz/php-utils",
+    "name": "fffaraz/utils",
     "type": "library",
     "description": "A collection of useful PHP functions, mini classes and snippets.",
     "keywords": ["helpers", "utils"],
