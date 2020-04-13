@@ -42,4 +42,20 @@ class Helper
             }
         }
     }
+
+    public static function contains($needle, $haystack)
+    {
+        return strpos(strtolower($haystack), strtolower($needle)) !== false;
+    }
+
+    public static function equals($str1, $str2)
+    {
+        return strtolower($str1) == strtolower($str2);
+    }
+
+    public static function splitlines($data)
+    {
+        return array_values(array_filter(array_map('trim', preg_split("/\r\n|\n|\r/", $data))));
+    }
+
 }
