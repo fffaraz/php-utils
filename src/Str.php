@@ -2,7 +2,7 @@
 
 namespace fffaraz\Utils;
 
-class String
+class Str
 {
     public static function equals($str1, $str2)
     {
@@ -72,7 +72,7 @@ class String
 
     public static function countWords($text, &$word2count, $ignored = [], $filter = null)
     {
-        $words = String::mb_str_word_count($text, 1);
+        $words = Str::mb_str_word_count($text, 1);
         foreach ($words as $word)
         {
             if (is_callable($filter)) $word = $filter($word);
