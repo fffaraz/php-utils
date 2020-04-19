@@ -14,8 +14,8 @@ class Log
             'agent' => \Request::header('User-Agent'),
         ];
         \Illuminate\Support\Facades\Redis::publish('log', print_r($log, true));
-        if($ignoreAdmin && \Illuminate\Support\Facades\Auth::id() == 1) return;
-        \Debugbar::disable();
+        if ($ignoreAdmin && \Illuminate\Support\Facades\Auth::id() == 1) return;
+        if (class_exists('\Debugbar')) \Debugbar::disable();
         \App\Models\Log::Create($log);
     }
 
