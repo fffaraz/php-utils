@@ -4,37 +4,17 @@ namespace fffaraz\Utils;
 
 class Helper
 {
-    public static function file_get_contents_curl($url)
-    {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        return $data;
-    }
-
     public static function get_ip()
     {
         $list = ['HTTP_X_REAL_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR'];
-        foreach($list as $key)
+        foreach ($list as $key)
         {
-            if(array_key_exists($key, $_SERVER) === true)
+            if (array_key_exists($key, $_SERVER) === true)
             {
-                foreach(explode(',', $_SERVER[$key]) as $ip)
+                foreach (explode(',', $_SERVER[$key]) as $ip)
                 {
                     $ip = trim($ip); // just to be safe
-                    if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false)
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false)
                     {
                         return $ip;
                     }
@@ -43,19 +23,23 @@ class Helper
         }
     }
 
-    public static function contains($needle, $haystack)
+    public static function trimDate($date, $trim = 0)
     {
-        return strpos(strtolower($haystack), strtolower($needle)) !== false;
+        switch ($trim)
+        {
+            case 1:
+                return date('Y-m-d H:00:00', strtotime(strval($date)));
+            case 2:
+                return date('Y-m-d 00:00:00', strtotime(strval($date)));
+            default:
+                return date('Y-m-d H:i:s', strtotime(strval($date)));
+        }
     }
 
-    public static function equals($str1, $str2)
+    public static function readFile($path)
     {
-        return strtolower($str1) == strtolower($str2);
+        $content = file_get_contents($path);
+        $lines = preg_split('/\r\n|\r|\n/', $content, -1, PREG_SPLIT_NO_EMPTY);
+        return $lines;
     }
-
-    public static function splitlines($data)
-    {
-        return array_values(array_filter(array_map('trim', preg_split("/\r\n|\n|\r/", $data))));
-    }
-
 }
