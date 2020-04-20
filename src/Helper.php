@@ -23,14 +23,16 @@ class Helper
         }
     }
 
-    public static function trimDate($date, $trim = 0)
+    public static function trimDate($date, $mode = 0)
     {
-        switch ($trim)
+        switch ($mode)
         {
             case 1:
                 return date('Y-m-d H:00:00', strtotime(strval($date)));
             case 2:
                 return date('Y-m-d 00:00:00', strtotime(strval($date)));
+            case 3:
+                return date('Y-m-d H:i:00', strtotime(strval($date)));
             default:
                 return date('Y-m-d H:i:s', strtotime(strval($date)));
         }
