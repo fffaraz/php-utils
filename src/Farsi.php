@@ -61,8 +61,8 @@ class Farsi
         ];
         $text = str_replace(array_keys($characters), array_values($characters), $text);
         $text = trim($text);
-        $text = String::mb_trim($text, '،');
-        $text = String::mb_trim($text, '؟');
+        $text = Str::mb_trim($text, '،');
+        $text = Str::mb_trim($text, '؟');
         $text = trim($text);
         return $text;
     }
