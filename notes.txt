@@ -1,2 +1,6 @@
 https://github.com/JBZoo/Utils
 https://github.com/plivo/plivo-php
+
+https://github.com/phpstan/phpstan
+https://github.com/vimeo/psalm
+phpunit
