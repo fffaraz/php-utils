@@ -9,7 +9,7 @@ class Log
         $userId = \Illuminate\Support\Facades\Auth::id();
         if (!is_string($category)) $category = 'invalid';
         if (!is_string($message)) $message = json_encode($message, JSON_UNESCAPED_UNICODE);
-        else if (strlen($message) < 1) $message = null;
+        if (strlen($message) < 1) $message = null;
         if ($exception != null) {
             echo 'Caught exception: ', $exception->getMessage(), "\n";
             $exception = $exception->__toString();
