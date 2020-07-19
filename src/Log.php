@@ -7,21 +7,24 @@ class Log
     public static function log($category = 'default', $message = '', $exception = null, $ignoreAdmin = true, $chatId = null)
     {
         $userId = \Illuminate\Support\Facades\Auth::id();
-        if (!is_string($category)) $category = 'invalid';
+        if (!is_string($category)) $category = json_encode($category, JSON_UNESCAPED_UNICODE);
         if (!is_string($message)) $message = json_encode($message, JSON_UNESCAPED_UNICODE);
-        if (strlen($message) < 1) $message = null;
         if ($exception != null) {
             echo 'Caught exception: ', $exception->getMessage(), "\n";
             $exception = $exception->__toString();
         }
+        $ip = \Request::ip();
+        $path = \Request::path();
+        $agent = strval(\Request::header('User-Agent'));
+        $referer = strval(\Request::server('HTTP_REFERER'));
         $log = [
             'user_id' => $userId,
             'category' => $category,
-            'ip' => \Request::ip(),
-            'message' => $message,
-            'path' => \Request::path(),
-            'agent' => strval(\Request::header('User-Agent')),
-            'referer' => strval(\Request::server('HTTP_REFERER')),
+            'ip' => strlen($ip) > 0 ? $ip : null,
+            'message' => strlen($message) > 0 ? $message : null,
+            'path' => strlen($path) > 0 ? $path : null,
+            'agent' => strlen($agent) > 0 ? $agent : null,
+            'referer' => strlen($referer) > 0 ? $referer : null,
             'exception' => $exception,
         ];
         \Illuminate\Support\Facades\Redis::publish('log', print_r($log, true));
