@@ -28,7 +28,7 @@ class Log
             'exception' => $exception,
         ];
         \Illuminate\Support\Facades\Redis::publish('log', print_r($log, true));
-        if ($exception != null && $ignoreAdmin && $userId == 1) return $log;
+        if ($exception == null && $ignoreAdmin && $userId == 1) return $log;
         if (class_exists('\Debugbar')) \Debugbar::disable();
         \App\Models\Log::Create($log);
         if ($chatId != null) {
