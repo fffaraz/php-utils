@@ -40,6 +40,16 @@ class Str
         return substr($string, -$len) === $endString;
     }
 
+    public static function isJson($string)
+    {
+        // https://stackoverflow.com/questions/6041741/fastest-way-to-check-if-a-string-is-json-in-php
+        if (!is_string($string)) return false;
+        if (strlen($string) < 2) return false;
+        if ($string[0] != '{' || $string[0] != '[') return false; // TODO: trim?
+        $json = json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
     public static function mb_trim($string, $charlist = null)
     {
         if (is_null($charlist)) return trim ($string);
