@@ -64,6 +64,7 @@ class Twitter
 
     public static function listMembers($slug, $screenname)
     {
+        // https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
         return Twitter::connection()->get('lists/members', ['slug' => $slug, 'owner_screen_name' => $screenname, 'count' => 5000]);
     }
 }
