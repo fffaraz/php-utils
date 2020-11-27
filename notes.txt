@@ -1,2 +1,8 @@
 https://github.com/JBZoo/Utils
 https://github.com/plivo/plivo-php
+
+aws/aws-sdk-php
+phpmailer/phpmailer
+robthree/twofactorauth
+squizlabs/php_codesniffer
+jaybizzle/crawler-detect
