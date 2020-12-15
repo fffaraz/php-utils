@@ -25,6 +25,7 @@ class Twitter
     {
         $connection = Twitter::connection();
         $media = $connection->upload('media/upload', ['media' => $filename]);
+        print_r($media);
         $parameters = [
             'status' => $text,
             'media_ids' => implode(',', [$media->media_id_string]),
