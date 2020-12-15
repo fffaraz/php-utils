@@ -44,14 +44,9 @@ class Log
 
         if ($chatId != null) {
             $log["email"] = \Illuminate\Support\Facades\Auth::user();
+            if ($log["email"]) $log["email"] = $log["email"]->email;
             $log["message"] = $message;
-            $telegram = new \Telegram\Bot\Api();
-            $response = $telegram->sendMessage([
-                'chat_id' => $chatId,
-                'text'    => json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'disable_web_page_preview' => true,
-                // 'parse_mode' => 'html',
-            ]);
+            \fffaraz\Utils\Telegram::message($chatId, json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         }
 
         return $log;
