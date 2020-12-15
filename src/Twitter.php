@@ -28,7 +28,7 @@ class Twitter
         print_r($media);
         $parameters = [
             'status' => $text,
-            'media_ids' => implode(',', [$media->media_id_string]),
+            'media_ids' => implode(',', [ $media['media_id_string'] ]),
         ];
         return $connection->post('statuses/update', $parameters);
     }
