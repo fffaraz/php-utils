@@ -8,3 +8,5 @@ phpmailer/phpmailer
 robthree/twofactorauth
 squizlabs/php_codesniffer
 jaybizzle/crawler-detect
+
+https://github.com/FriendsOfPHP/Goutte
