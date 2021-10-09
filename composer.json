@@ -7,6 +7,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
+        "guzzlehttp/psr7": "^2",
         "irazasyed/telegram-bot-sdk": "dev-develop",
         "abraham/twitteroauth": "dev-main"
     },
