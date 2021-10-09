@@ -7,8 +7,8 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "irazasyed/telegram-bot-sdk": "^3",
-        "abraham/twitteroauth": "^1"
+        "irazasyed/telegram-bot-sdk": "dev-develop",
+        "abraham/twitteroauth": "dev-main"
     },
     "autoload": {
         "psr-4": {
