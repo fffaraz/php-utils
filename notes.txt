@@ -1,12 +1,19 @@
 https://github.com/JBZoo/Utils
 https://github.com/plivo/plivo-php
-
+---
 https://github.com/phpstan/phpstan
-
+---
 aws/aws-sdk-php
 phpmailer/phpmailer
 robthree/twofactorauth
 squizlabs/php_codesniffer
 jaybizzle/crawler-detect
-
+---
 https://github.com/FriendsOfPHP/Goutte
+---
+https://github.com/FriendsOfPHP/PHP-CS-Fixer
+
+mkdir --parents tools/php-cs-fixer
+composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+---
