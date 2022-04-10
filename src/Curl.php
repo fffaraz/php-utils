@@ -17,11 +17,11 @@ class Curl
 
         $curl = curl_init();
 
-        curl_setopt($curl, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($curl, CURLOPT_AUTOREFERER, true);
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 5);
 
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
@@ -43,10 +43,14 @@ class Curl
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        if (strlen($referer) > 0) curl_setopt($curl, CURLOPT_REFERER, $referer);
+        if (strlen($referer) > 0) {
+            curl_setopt($curl, CURLOPT_REFERER, $referer);
+        }
         $result = curl_exec($curl);
         curl_close($curl);
-        if (!$result) return false;
+        if (!$result) {
+            return false;
+        }
         return $result;
     }
 
@@ -104,12 +108,12 @@ class Curl
             $post['file'] = '@'.$file_to_scan;
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL,$post_url);
-            curl_setopt($ch, CURLOPT_POST,1);
+            curl_setopt($ch, CURLOPT_URL, $post_url);
+            curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            $api_reply = curl_exec ($ch);
-            curl_close ($ch);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $api_reply = curl_exec($ch);
+            curl_close($ch);
 
             $api_reply_array = json_decode($api_reply, true);
 
@@ -118,6 +122,5 @@ class Curl
                 echo "\nor just keep checking using the file hash, but it will only report once it is completed (no 'PENDING/QUEUED' reply will be given).";
             }
         }
-
     }
 }

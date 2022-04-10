@@ -7,7 +7,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 
 class MyLoggingHandler extends AbstractProcessingHandler
 {
-    protected function write(array $record) : void
+    protected function write(array $record): void
     {
         // dd($record);
         $data = [

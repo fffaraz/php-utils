@@ -1,3 +1,7 @@
+.dockerweb/
+.php-cs-fixer.cache
+tools/
+
 /vendor/
 node_modules/
 npm-debug.log

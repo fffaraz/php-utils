@@ -8,10 +8,15 @@ class Log
     {
         $userId = \Illuminate\Support\Facades\Auth::id();
 
-        if (!is_string($category)) $category = json_encode($category, JSON_UNESCAPED_UNICODE);
+        if (!is_string($category)) {
+            $category = json_encode($category, JSON_UNESCAPED_UNICODE);
+        }
 
-        if (!is_string($message)) $messageStr = json_encode($message, JSON_UNESCAPED_UNICODE);
-        else $messageStr = $message;
+        if (!is_string($message)) {
+            $messageStr = json_encode($message, JSON_UNESCAPED_UNICODE);
+        } else {
+            $messageStr = $message;
+        }
 
         if ($exception != null) {
             echo 'Caught exception: ', $exception->getMessage(), "\n";
@@ -36,15 +41,21 @@ class Log
 
         \Illuminate\Support\Facades\Redis::publish('log', print_r($log, true));
 
-        if ($exception == null && $ignoreAdmin && $userId == 1) return $log;
+        if ($exception == null && $ignoreAdmin && $userId == 1) {
+            return $log;
+        }
 
-        if ($userId != 1 && class_exists('\Debugbar')) \Debugbar::disable();
+        if ($userId != 1 && class_exists('\Debugbar')) {
+            \Debugbar::disable();
+        }
 
         \App\Models\Log::Create($log);
 
         if ($chatId != null) {
             $log["email"] = \Illuminate\Support\Facades\Auth::user();
-            if ($log["email"]) $log["email"] = $log["email"]->email;
+            if ($log["email"]) {
+                $log["email"] = $log["email"]->email;
+            }
             $log["message"] = $message;
             \fffaraz\Utils\Telegram::message($chatId, json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         }

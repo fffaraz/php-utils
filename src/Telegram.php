@@ -6,10 +6,11 @@ class Telegram
 {
     public static function api($token = '')
     {
-        if (strlen($token) > 0)
+        if (strlen($token) > 0) {
             return new \Telegram\Bot\Api($token);
-        else
+        } else {
             return new \Telegram\Bot\Api();
+        }
     }
 
     public static function message($chat_id, $text, $parse_mode = '')
