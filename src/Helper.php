@@ -39,4 +39,17 @@ class Helper
         $lines = preg_split('/\r\n|\r|\n/', $content, -1, PREG_SPLIT_NO_EMPTY);
         return $lines;
     }
+
+    public static function ping($ip)
+    {
+        $output = null;
+        $result = null;
+        exec("ping -n 1 $ip", $output, $result);
+        if ($result != 0) {
+            return -1;
+        }
+        $matches = null;
+        preg_match('/time(=|<)(.*)ms/', $output[1], $matches);
+        return floatval(trim($matches[2]));
+    }
 }
