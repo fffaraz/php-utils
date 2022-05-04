@@ -44,7 +44,7 @@ class Helper
     {
         $output = null;
         $result = null;
-        exec("ping -n 1 $ip", $output, $result);
+        exec("ping -c 1 $ip", $output, $result);
         if ($result != 0) {
             return -1;
         }
